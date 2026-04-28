@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico Púrpura — Resumen ejecutivo · Utópica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FBF6EC;
+  --paper-2: #F5EFE0;
+  --ink: #1A1A1A;
+  --ink-2: #2C2C2C;
+  --ink-3: #6F6F6F;
+  --ink-4: #A8A8A8;
+  --hairline: #DDD7CC;
+  --amber: #F5B042;
+  --amber-soft: #F8C97A;
+  --brown: #6B3D1F;
+  --brown-soft: #8C5D3C;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  height: 100%;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: clamp(2rem, 5vh, 4rem) clamp(2rem, 6vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  overflow-y: auto;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.slide-inner {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.metadata {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--brown);
+  margin-bottom: 0.75rem;
+}
+
+h1.display {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+  max-width: 22ch;
+}
+h1.display em { font-style: italic; }
+
+h2.section {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+  max-width: 24ch;
+}
+h2.section em { font-style: italic; }
+
+p.lede {
+  font-family: var(--serif);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  line-height: 1.4;
+  color: var(--ink-3);
+  font-style: italic;
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin-bottom: 0.75rem;
+  max-width: 65ch;
+}
+
+.marker {
+  background: var(--amber);
+  color: var(--brown);
+  padding: 0 6px;
+  font-style: italic;
+}
+
+.stamp {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 720px;
+}
+.kpi-block {
+  border: 1px solid var(--hairline);
+  padding: 1rem 1.25rem;
+}
+.kpi-block .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+.kpi-block .value {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.kam-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 900px) { .kam-grid { grid-template-columns: 1fr; } }
+
+.kam {
+  border-top: 2px solid var(--ink);
+  padding-top: 1rem;
+}
+.kam .role {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brown);
+  margin-bottom: 0.4rem;
+}
+.kam h3 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+.kam .label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+.kam .text { font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+.kam .need {
+  border-left: 2px solid var(--amber);
+  padding-left: 0.8rem;
+  margin-top: 0.8rem;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.patterns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 2.5rem;
+  margin-top: 1rem;
+}
+@media (max-width: 720px) { .patterns { grid-template-columns: 1fr; } }
+.pattern {
+  border-top: 1px solid var(--hairline);
+  padding-top: 0.9rem;
+}
+.pattern .num {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--brown);
+  line-height: 1;
+}
+.pattern h3 {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0.4rem 0 0.4rem;
+}
+.pattern p { font-size: 14px; line-height: 1.5; color: var(--ink-2); }
+
+.levers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 900px) { .levers { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .levers { grid-template-columns: 1fr; } }
+.lever {
+  border-top: 2px solid var(--ink);
+  padding-top: 1rem;
+}
+.lever .code {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brown);
+  margin-bottom: 0.4rem;
+}
+.lever h3 {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+}
+.lever p { font-size: 14px; line-height: 1.5; }
+
+.timeline { margin-top: 1.5rem; }
+.phase {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--hairline);
+  align-items: start;
+}
+.phase:first-of-type { border-top: 2px solid var(--ink); }
+@media (max-width: 720px) { .phase { grid-template-columns: 1fr; gap: 0.4rem; } }
+.phase .when {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brown);
+  padding-top: 4px;
+}
+.phase h3 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+.phase p { font-size: 14px; line-height: 1.5; }
+
+.next-list { list-style: none; padding: 0; margin-top: 2rem; }
+.next-list li {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--hairline);
+  align-items: start;
+}
+.next-list li:first-child { border-top: 2px solid var(--ink); }
+.next-list .num-big {
+  font-family: var(--serif);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: var(--brown);
+  font-style: italic;
+}
+.next-list .text {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.35;
+  color: var(--ink);
+}
+.next-list .text strong {
+  font-style: normal;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--brown);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.nav {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+  padding: 0.5rem 0.75rem;
+  z-index: 100;
+}
+.nav button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.nav button:hover { color: var(--ink); }
+.nav button:disabled { opacity: 0.3; cursor: default; }
+.nav .counter {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+  padding: 0 0.5rem;
+}
+.nav .dots { display: flex; gap: 4px; padding: 0 0.5rem; }
+.nav .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hairline);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav .dot.active { background: var(--amber); }
+
+.slide-tag {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.slide-foot {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2rem;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<section class="slide active" data-slide="1">
+  <div class="slide-tag">№ 01 / 06</div>
+  <div class="slide-inner">
+    <div class="metadata">UTÓPICA · CDMX · 2026 · ABR</div>
+    <div class="metadata">VOL. I · № 01 · DIAGNÓSTICO · RESUMEN EJECUTIVO</div>
+    <div class="eyebrow" style="margin-top: 2.5rem;">Cliente · Púrpura AI · Para Memo Garza</div>
+    <h1 class="display">Cómo aprovechar las cuentas que <span class="marker">ya</span> <em>tienes</em>.</h1>
+    <p class="lede">Diagnóstico del equipo de Key Account Management y plan de coaching para crecer cuentas existentes — Sandra, Marta, Michelle.</p>
+    <div class="stamp">
+      <div class="kpi-block">
+        <div class="label">Objetivo 2026</div>
+        <div class="value">$50M · Púrpura $30M + Osaru $20M</div>
+      </div>
+      <div class="kpi-block">
+        <div class="label">Personas</div>
+        <div class="value">Sandra · Marta · Michelle</div>
+      </div>
+      <div class="kpi-block">
+        <div class="label">Fuentes</div>
+        <div class="value">3 sesiones 1:1 — 24–28 abr</div>
+      </div>
+      <div class="kpi-block">
+        <div class="label">Autor</div>
+        <div class="value">Gaël Thomé · Utópica</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot">Utópica · Vol. I · № 01</div>
+</section>
+
+<section class="slide" data-slide="2">
+  <div class="slide-tag">№ 02 / 06</div>
+  <div class="slide-inner">
+    <div class="metadata">S.01</div>
+    <h2 class="section">Lo que <em>escuché</em> de cada una.</h2>
+    <p class="lede">Las tres son fieras, las tres están dispuestas, las tres reconocen lo que les falta.</p>
+    <div class="kam-grid">
+      <div class="kam">
+        <div class="role">P.01 · Spark / Capacitación</div>
+        <h3>Sandra Álvarez</h3>
+        <div class="label">Fortaleza</div>
+        <div class="text">Operadora muy fuerte y la que más citas comerciales tiene. Honesta sobre lo que no sabe.</div>
+        <div class="label">Brecha</div>
+        <div class="text">Se autoetiqueta como "no vendedora". Speech merolico que no califica.</div>
+        <div class="need">Guion de apertura + mapa de calificación que reemplace el merolico.</div>
+      </div>
+      <div class="kam">
+        <div class="role">P.02 · KAM / Account growth</div>
+        <h3>Marta Rodríguez</h3>
+        <div class="label">Fortaleza</div>
+        <div class="text">La más madura en lectura comercial. Construye confianza con comités directivos.</div>
+        <div class="label">Brecha</div>
+        <div class="text">No convierte el entendimiento en propuesta económica con ROI. Cae en lenguaje técnico.</div>
+        <div class="need">Marco de decisión de compra + lenguaje de capacidad vs commodity.</div>
+      </div>
+      <div class="kam">
+        <div class="role">P.03 · Estrategia / Custom AI</div>
+        <h3>Michelle Sánchez</h3>
+        <div class="label">Fortaleza</div>
+        <div class="text">Sin bloqueo psicológico con vender. Cabeza estratégica que pide estructura y la absorbe rápido.</div>
+        <div class="label">Brecha</div>
+        <div class="text">Cero pitches liderados desde cero. Cree que necesita producto cerrado para vender.</div>
+        <div class="need">Adueñarse del Diagnóstico como ancla. Método arriba del producto, no abajo.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot">Diagnóstico individual</div>
+</section>
+
+<section class="slide" data-slide="3">
+  <div class="slide-tag">№ 03 / 06</div>
+  <div class="slide-inner">
+    <div class="metadata">S.02</div>
+    <h2 class="section">Lo que <em>comparten</em> las tres.</h2>
+    <p class="lede">Cuatro hechos que aparecen en las tres conversaciones. Consecuencia natural de una empresa joven creciendo rápido.</p>
+    <div class="patterns">
+      <div class="pattern">
+        <div class="num">01</div>
+        <h3>Memo es hoy el cerrador y el coach.</h3>
+        <p>Bottleneck por diseño, no por cultura. Si Memo se va a autoridad en IA, Silicon Valley y Konozaru, alguien tiene que cerrar las cuentas existentes con el mismo nivel.</p>
+      </div>
+      <div class="pattern">
+        <div class="num">02</div>
+        <h3>No comparten un vocabulario común.</h3>
+        <p>Cada una intuye o copia pedazos de Memo. Cada conversación se reinventa. Falta mapa, hoja de decisión y catálogo de los tres sabores que las tres usen igual.</p>
+      </div>
+      <div class="pattern">
+        <div class="num">03</div>
+        <h3>El siguiente problema en la cuenta no se empuja.</h3>
+        <p>Cada proyecto cerrado abre el siguiente — adopción, gobierno, expansión. En cuentas Púrpura ese siguiente problema vale otro proyecto Púrpura. Hoy las KAMs no detectan esa oportunidad.</p>
+      </div>
+      <div class="pattern">
+        <div class="num">04</div>
+        <h3>El motor de demanda existe; falta el de cierre.</h3>
+        <p>Telstock performa, BT1 trae citas, eventos meten leads. La demanda no es el cuello. El cuello es lo que pasa después de la primera junta — calificar, ordenar la decisión, presentar la propuesta.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot">Patrones compartidos</div>
+</section>
+
+<section class="slide" data-slide="4">
+  <div class="slide-tag">№ 04 / 06</div>
+  <div class="slide-inner">
+    <div class="metadata">S.03 · S.04</div>
+    <h2 class="section">El eje: <em>cuentas que ya tienes</em>. Cuatro palancas en secuencia.</h2>
+    <p class="lede">Donde el equipo ya tiene contexto, confianza y conversación abierta. La palanca corta es vender el siguiente problema dentro de la cuenta.</p>
+    <div class="levers">
+      <div class="lever">
+        <div class="code">L.01</div>
+        <h3>Workshop grupal de venta consultiva</h3>
+        <p>1 día completo. Las tres + Cynthia + Memo. Marco común desde el inicio. Role-plays cruzados con casos reales. Rompe la asimetría con Memo.</p>
+      </div>
+      <div class="lever">
+        <div class="code">L.02</div>
+        <h3>Coaching 1:1 semanal</h3>
+        <p>1 hora con cada una. 8 sesiones × 3 personas = 24 sesiones en 2 meses. Aplicamos el marco a sus cuentas reales — siguiente conversación, propuesta, mapeo.</p>
+      </div>
+      <div class="lever">
+        <div class="code">L.03</div>
+        <h3>Tres activos compartidos</h3>
+        <p>Mapa de venta consultiva. Hoja de decisión del cliente. Catálogo de los tres sabores. Construidos con casos reales — manual operativo del KAM.</p>
+      </div>
+      <div class="lever">
+        <div class="code">L.04</div>
+        <h3>Foro mensual de pipeline</h3>
+        <p>90 min al mes con las tres + Cynthia + Memo + Gaël. 3–5 oportunidades concretas con el marco común. Empieza en el mes 3.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot">Eje y plan</div>
+</section>
+
+<section class="slide" data-slide="5">
+  <div class="slide-tag">№ 05 / 06</div>
+  <div class="slide-inner">
+    <div class="metadata">S.05</div>
+    <h2 class="section">Cómo se vería el <em>calendario</em>.</h2>
+    <p class="lede">Propuesta inicial. Ajustamos en la marcha.</p>
+    <div class="timeline">
+      <div class="phase">
+        <div class="when">FASE 0 · ABR 24–28</div>
+        <div>
+          <h3>Diagnóstico individual — ya hecho.</h3>
+          <p>Tres sesiones de una hora. Output: este documento.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="when">FASE 1 · SEM. 01</div>
+        <div>
+          <h3>Marco común.</h3>
+          <p>Workshop grupal de venta consultiva, 1 día. Las tres + Cynthia + Memo. Cierra con vocabulario y marco compartido.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="when">FASE 2 · SEM. 02–09</div>
+        <div>
+          <h3>Aplicación a cuentas reales.</h3>
+          <p>8 sesiones 1:1 semanales por KAM = 24 sesiones en 2 meses. En paralelo: construcción de los tres activos. Catálogo cerrado contigo en semana 3.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="when">FASE 3 · MES 3+</div>
+        <div>
+          <h3>Ritmo sostenido.</h3>
+          <p>1:1 quincenal con cada KAM. Foro mensual de pipeline. Activos vivos que se actualizan con casos reales.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot">Calendario</div>
+</section>
+
+<section class="slide" data-slide="6">
+  <div class="slide-tag">№ 06 / 06</div>
+  <div class="slide-inner">
+    <div class="metadata">S.07</div>
+    <h2 class="section">Lo que <em>sigue</em>.</h2>
+    <p class="lede">Tres pasos concretos para arrancar la próxima semana.</p>
+    <ol class="next-list">
+      <li>
+        <div class="num-big">01</div>
+        <div class="text"><strong>Validar y cerrar alcance</strong>Memo + Gaël: 30 min para validar este documento y cerrar el alcance del Catálogo de los tres sabores.</div>
+      </li>
+      <li>
+        <div class="num-big">02</div>
+        <div class="text"><strong>Agendar lo que falta</strong>Michelle: agendar coaching semanal. Sandra (lunes 1:00 pm) y Marta (miércoles 5:00 pm) ya lo tienen.</div>
+      </li>
+      <li>
+        <div class="num-big">03</div>
+        <div class="text"><strong>Cierre del Catálogo</strong>En las próximas dos semanas. Le pone bordes claros a Michelle, le da segunda oferta a Sandra y le da lenguaje a Marta.</div>
+      </li>
+    </ol>
+    <p style="margin-top: 2.5rem; font-family: var(--sans); font-style: italic; color: var(--ink-3);">— Gaël Thomé, Fundador de Utópica</p>
+  </div>
+  <div class="slide-foot">UTÓPICA · CDMX · 2026 · ABR · VOL. I · № 01</div>
+</section>
+
+</div>
+
+<div class="nav">
+  <button id="prev" aria-label="Anterior">← Atrás</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter">1 / 6</span>
+  <button id="next" aria-label="Siguiente">Siguiente →</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+const counter = document.getElementById('counter');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+const dotsBox = document.getElementById('dots');
+
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('span');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => go(i));
+  dotsBox.appendChild(d);
+}
+const dots = dotsBox.querySelectorAll('.dot');
+
+function go(i) {
+  if (i < 0 || i >= total) return;
+  slides[current].classList.remove('active');
+  dots[current].classList.remove('active');
+  current = i;
+  slides[current].classList.add('active');
+  dots[current].classList.add('active');
+  counter.textContent = (current + 1) + ' / ' + total;
+  prev.disabled = current === 0;
+  next.disabled = current === total - 1;
+}
+
+prev.addEventListener('click', () => go(current - 1));
+next.addEventListener('click', () => go(current + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(current - 1); }
+  if (e.key === 'Home') go(0);
+  if (e.key === 'End') go(total - 1);
+});
+
+prev.disabled = true;
+</script>
+
+</body>
+</html>

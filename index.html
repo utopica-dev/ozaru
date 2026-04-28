@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osaru · Utópica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #FBF6EC;
+  --ink: #1A1A1A;
+  --ink-2: #2C2C2C;
+  --ink-3: #6F6F6F;
+  --ink-4: #A8A8A8;
+  --hairline: #DDD7CC;
+  --amber: #F5B042;
+  --brown: #6B3D1F;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'DM Mono', 'Courier New', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: clamp(3rem, 10vh, 7rem) clamp(1.5rem, 5vw, 3rem);
+  flex: 1;
+}
+.metadata {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 1rem 0 1rem;
+}
+h1 em { font-style: italic; }
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.4;
+  color: var(--ink-3);
+  margin-bottom: 3rem;
+  max-width: 56ch;
+}
+.docs { list-style: none; padding: 0; }
+.docs li {
+  border-top: 1px solid var(--hairline);
+  padding: 1.5rem 0;
+}
+.docs li:first-child { border-top: 2px solid var(--ink); }
+.docs a {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 1.5rem;
+  align-items: baseline;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.docs a:hover { color: var(--brown); }
+.docs .num {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brown);
+  padding-top: 6px;
+}
+.docs .title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.docs .title small {
+  display: block;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-top: 0.3rem;
+  font-style: normal;
+}
+.docs .arrow {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-4);
+  padding-top: 10px;
+}
+footer {
+  padding: 2rem clamp(1.5rem, 5vw, 3rem);
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-4);
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="metadata">UTÓPICA · OSARU</div>
+  <h1>Espacio de <em>trabajo</em>.</h1>
+  <p class="lede">Documentos vivos del proyecto Osaru — Púrpura AI. Acceso directo a entregables.</p>
+
+  <ul class="docs">
+    <li>
+      <a href="diagnostico-equipo-purpura.html">
+        <span class="num">№ 01</span>
+        <span class="title">Diagnóstico equipo Púrpura — Resumen ejecutivo<small>Sandra · Marta · Michelle. Coaching de venta consultiva. Abril 2026.</small></span>
+        <span class="arrow">Ver →</span>
+      </a>
+    </li>
+  </ul>
+</main>
+<footer>UTÓPICA · CDMX · 2026</footer>
+</body>
+</html>
