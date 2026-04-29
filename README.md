@@ -1,8 +1,8 @@
-# osaru
+# ozaru
 
-Espacio de trabajo del proyecto **Osaru — Púrpura AI** de Utópica.
+Espacio de trabajo del proyecto **Ozaru — Púrpura AI** de Utópica.
 
-Sitio publicado en [osaru.utopica.net](https://osaru.utopica.net).
+Sitio publicado en [ozaru.utopica.net](https://ozaru.utopica.net).
 
 ## Contenido
 
